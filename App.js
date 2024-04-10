@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { Header } from './components/Header';
 import { ShoppingList } from './components/ShoppingList';
+import { AddShoppingItem } from './components/AddShoppingItem';
 
 export default function App() {
 
@@ -21,11 +22,22 @@ export default function App() {
     },
   ])
 
+  const deleteItem = (item) => {
+    setShoppingList((prevShoppingList) => {
+      return prevShoppingList.filter((listItem) => listItem.id !== item.id)
+    })
+  }
+
+  const addItem = (item) => {
+    setShoppingList([...shoppingList, {todo: item, id: Math.random().toString()}])
+  }
+
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
       <Header/>
-      <ShoppingList list={shoppingList}/>
+      <AddShoppingItem addItem={addItem}/>
+      <ShoppingList list={shoppingList} deleteItem={deleteItem}/>
     </View>
   );
 }
