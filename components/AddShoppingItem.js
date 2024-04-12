@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { StyleSheet, View, Text, TextInput, Button } from 'react-native';
 
-export const AddShoppingItem = ({addItem}) => {
+export const AddShoppingItem = ({ addItem }) => {
 
     const [item, setItem] = useState('')
 
@@ -13,8 +13,8 @@ export const AddShoppingItem = ({addItem}) => {
     console.log(item)
     return (
         <View style={styles.container}>
-            <TextInput style={styles.input} placeholder='Enter an Item' value={item} onChangeText={(text) => setItem(text)}/>
-            <Button title='Add Item' onPress={() => pressHandler(item)}/>
+            <TextInput style={styles.input} placeholder='Enter an Item' value={item} onChangeText={(text) => setItem(text)} />
+            <Button title='Add Item' onPress={() => pressHandler(item)} color='cornflowerblue' />
         </View>
     )
 }

@@ -1,6 +1,7 @@
 import { FlatList, StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
-export const ShoppingList = ({list, deleteItem}) => {
+export const ShoppingList = ({ list, deleteItem }) => {
     return (
         <FlatList
             data={list}
@@ -8,10 +9,13 @@ export const ShoppingList = ({list, deleteItem}) => {
             ItemSeparatorComponent={() => {
                 return <View style={styles.separator}></View>
             }}
-            renderItem={({item}) => {
+            renderItem={({ item }) => {
                 return (
                     <TouchableOpacity onPress={() => deleteItem(item)}>
-                        <Text style={styles.item}>{item.todo}</Text>
+                        <View style={styles.container}>
+                            <Text style={styles.item}>{item.todo}</Text>
+                            <MaterialIcons name="delete" size={20} color="black" style={styles.icon} />
+                        </View>
                     </TouchableOpacity>
                 )
             }}
@@ -31,5 +35,13 @@ const styles = StyleSheet.create({
     },
     flatlist: {
         paddingTop: 20,
-    }
+    },
+    container: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+    },
+    icon: {
+        marginRight: 20,
+    },
 })

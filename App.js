@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native';
+import { Alert, Keyboard, StyleSheet, Text, View } from 'react-native';
 import { Header } from './components/Header';
 import { ShoppingList } from './components/ShoppingList';
 import { AddShoppingItem } from './components/AddShoppingItem';
@@ -29,16 +30,26 @@ export default function App() {
   }
 
   const addItem = (item) => {
-    setShoppingList([...shoppingList, {todo: item, id: Math.random().toString()}])
+    if (item.length === 0) {
+      Alert.alert("Alert!", "Please enter a item.")
+      return
+    }
+    setShoppingList([...shoppingList, { todo: item, id: Math.random().toString() }])
+  }
+
+  const dismissKeyboard = () => {
+    Keyboard.dismiss()
   }
 
   return (
-    <View style={styles.container}>
-      <StatusBar style="auto" />
-      <Header/>
-      <AddShoppingItem addItem={addItem}/>
-      <ShoppingList list={shoppingList} deleteItem={deleteItem}/>
-    </View>
+    <TouchableWithoutFeedback onPress={dismissKeyboard}>
+      <View style={styles.container}>
+        <StatusBar style="auto" />
+        <Header />
+        <AddShoppingItem addItem={addItem} />
+        <ShoppingList list={shoppingList} deleteItem={deleteItem} />
+      </View>
+    </TouchableWithoutFeedback>
   );
 }
 
